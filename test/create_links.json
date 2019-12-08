@@ -1,0 +1,95 @@
+[
+    {
+        "rev": "1",
+        "rawText": "@Eva #Villerville. %02.10.2018  §\"S01E01 Schicksalsfäden\"",
+        "formMarkedText": "@Eva #Villerville. %02.10.2018 - §\"S01E01 Schicksalsfäden\"",
+        "htmlText": "",
+        "formValues": {},
+        "tags": [
+            "@Eva",
+            "#Villerville",
+            "%2018",
+            "%10/02/2018",
+            "%2018-10-02",
+            "%02.10.2018",
+            "§S01E01 Schicksalsfäden"
+        ],
+        "actualTags": {
+            "@Eva": [
+                "@Eva"
+            ],
+            "#Villerville": [
+                "#Villerville"
+            ],
+            "§S01E01 Schicksalsfäden": [
+                "§S01E01 Schicksalsfäden"
+            ]
+        },
+        "timestamp": "2018-09-02T22:27:50.302Z",
+        "uniqueId": "cls:545cb2eb864c4b12ac069b93b2afb66a",
+        "conflictingRevisions": null,
+        "log": "72fd52ed0e37f5c05d9bb448ccde3784"
+    },
+    {
+        "rev": "1",
+        "rawText": "@\"Jean Luchs\" #\"Villerville\" %02.10.2018 - §\"S01E01 Schicksalsfäden\"",
+        "formMarkedText": " @\"Jean Luchs\" #\"Villerville\" %02.10.2018 - §\"S01E01 Schicksalsfäden\"",
+        "htmlText": "",
+        "formValues": {},
+        "tags": [
+            "%2018",
+            "%10/02/2018",
+            "%2018-10-02",
+            "%02.10.2018",
+            "@Jean Luchs",
+            "#Villerville",
+            "§S01E01 Schicksalsfäden"
+        ],
+        "actualTags": {
+            "@Jean Luchs": [
+                "@Jean Luchs"
+            ],
+            "#Villerville": [
+                "#Villerville"
+            ],
+            "§S01E01 Schicksalsfäden": [
+                "§S01E01 Schicksalsfäden"
+            ]
+        },
+        "timestamp": "2018-10-02T22:33:11.131Z",
+        "uniqueId": "cls:4786a67415b941b8a34515a0033e923a",
+        "conflictingRevisions": null,
+        "log": "72fd52ed0e37f5c05d9bb448ccde3784"
+    },
+    {
+        "rev": "1",
+        "rawText": "@Eva @\"Jean Luchs\" %02.10.2018 - §\"S01E01 Schicksalsfäden\"",
+        "formMarkedText": "@Eva @\"Jean Luchs\" %02.10.2018 - §\"S01E01 Schicksalsfäden\"",
+        "htmlText": "",
+        "formValues": {},
+        "tags": [
+            "@Eva",
+            "@Jean Luchs",
+            "%2018",
+            "%10/02/2018",
+            "%2018-10-02",
+            "%02.10.2018",
+            "§S01E01 Schicksalsfäden"
+        ],
+        "actualTags": {
+            "@Eva": [
+                "@Eva"
+            ],
+            "@Jean Luchs": [
+                "@Jean Luchs"
+            ],
+            "§S01E01 Schicksalsfäden": [
+                "§S01E01 Schicksalsfäden"
+            ]
+        },
+        "timestamp": "2018-11-02T22:33:11.131Z",
+        "uniqueId": "cls:4786a67415b941b8a34515a0033e923a",
+        "conflictingRevisions": null,
+        "log": "72fd52ed0e37f5c05d9bb448ccde3784"
+    }
+]
