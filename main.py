@@ -167,6 +167,8 @@ class MainFrame(wx.Frame):
                          title='Campaign Log Analyzer', size=(800, 600))
         self.panel = MainPanel(self)
         #self.create_menu()
+        icon_logo = wx.Icon("cllogo.ico", wx.BITMAP_TYPE_ICO)
+        self.SetIcon(icon_logo)
         self.Layout()
         self.Show()
 
