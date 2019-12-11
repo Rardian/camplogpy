@@ -1,2 +1,1 @@
-json==2.0.9
-wx==4.0.7.post2
+wxPython==4.0.7.post2
