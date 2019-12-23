@@ -57,7 +57,7 @@ class MainPanel(wx.Panel):
 
         button = wx.Button(self, wx.ID_ANY, 'Bild', (10, 8))
         button.Bind(wx.EVT_BUTTON, onButton)
-        headerSizer.Add(button, 0, wx.ALL, 0)
+        #headerSizer.Add(button, 0, wx.ALL, 0)
 
         sizer.Add(headerSizer, 0, wx.ALL|wx.EXPAND, 6)
 
