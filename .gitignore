@@ -4,3 +4,4 @@ build/
 dist/
 hello.py
 main.spec
+CamplogAnalyzer.spec
