@@ -44,12 +44,22 @@ class MainPanel(wx.Panel):
     def create_right_sizer(self):
         sizer = wx.BoxSizer(wx.VERTICAL)
         
-#        self.headline = wx.StaticText(self, label="Kein Log geladen")
+        headerSizer = wx.BoxSizer(wx.HORIZONTAL)
+
         self.headline = wx.StaticText(self)
         font = wx.Font(16, wx.ROMAN, wx.ITALIC, wx.NORMAL) 
         self.headline.SetFont(font) 
         self.headline.SetLabel("Kein Log geladen") 
-        sizer.Add(self.headline, 0, wx.ALL|wx.EXPAND, 6)
+        headerSizer.Add(self.headline, 1, wx.ALL|wx.EXPAND, 0)
+
+        def onButton(self):
+            print("hallo")
+
+        button = wx.Button(self, wx.ID_ANY, 'Bild', (10, 8))
+        button.Bind(wx.EVT_BUTTON, onButton)
+        headerSizer.Add(button, 0, wx.ALL, 0)
+
+        sizer.Add(headerSizer, 0, wx.ALL|wx.EXPAND, 6)
 
         self.linkedTags_list_ctrl = wx.ListCtrl(
             self, size=(351, 150), 
