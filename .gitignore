@@ -2,6 +2,7 @@ __pycache__/
 .pytest_cache/
 build/
 dist/
+images/
 hello.py
 main.spec
 CamplogAnalyzer.spec
