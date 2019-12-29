@@ -1,8 +1,9 @@
-import wx
 import json
+import datetime
+import wx
 from tag import Tag
 from campaign_log_reader import CampaignLogReader
-import datetime
+from tag_image_dialog import TagImageDialog
 
 class MainPanel(wx.Panel):
     def __init__(self, parent):
@@ -43,21 +44,31 @@ class MainPanel(wx.Panel):
 
     def create_right_sizer(self):
         sizer = wx.BoxSizer(wx.VERTICAL)
-        
+
         headerSizer = wx.BoxSizer(wx.HORIZONTAL)
 
         self.headline = wx.StaticText(self)
-        font = wx.Font(16, wx.ROMAN, wx.ITALIC, wx.NORMAL) 
+        font = wx.Font(16, wx.ROMAN, wx.ITALIC, wx.NORMAL)
         self.headline.SetFont(font) 
         self.headline.SetLabel("Kein Log geladen") 
         headerSizer.Add(self.headline, 1, wx.ALL|wx.EXPAND, 0)
 
-        def onButton(self):
-            print("hallo")
+        def on_click(self):
+            with self.img_dialog as dlg:
+                if dlg.ShowModal() == wx.ID_OK:
+                    # do something here
+                    print('Hello')
+                else:
+                    # handle dialog being cancelled or ended by some other button
+                    print('Else')
+
+                # The dialog is automatically destroyed on exit from the context manager
+            #print("hallo")
 
         button = wx.Button(self, wx.ID_ANY, 'Bild', (10, 8))
-        button.Bind(wx.EVT_BUTTON, onButton)
-        #headerSizer.Add(button, 0, wx.ALL, 0)
+        #self.Bind(wx.EVT_BUTTON, lambda event: on_click(event, self.selected_main_tag), button)
+        button.Bind(wx.EVT_BUTTON, on_click)
+        headerSizer.Add(button, 0, wx.ALL, 0)
 
         sizer.Add(headerSizer, 0, wx.ALL|wx.EXPAND, 6)
 
@@ -86,6 +97,9 @@ class MainPanel(wx.Panel):
         self.headline.SetLabelText(item.GetText())
 
         row_tag = self.table_objects[id_of_row_tag]
+        self.selected_main_tag = row_tag.id
+        self.img_dialog = TagImageDialog(self, "Passendes Bild")
+        self.img_dialog.set_selected_tag(row_tag.id)
         linkedEntries = CampaignLogReader(self.data).createLinks(row_tag)
         #linkedEntries = CampaignLogReader(self.data).createLinks(self.tagsInTable[ind])
         #self.linkedPostsInTable = []
@@ -177,7 +191,7 @@ class MainFrame(wx.Frame):
                          title='Campaign Log Analyzer', size=(800, 600))
         self.panel = MainPanel(self)
         #self.create_menu()
-        icon_logo = wx.Icon("cllogo.ico", wx.BITMAP_TYPE_ICO)
+        icon_logo = wx.Icon("resources/cllogo.ico", wx.BITMAP_TYPE_ICO)
         self.SetIcon(icon_logo)
         self.Layout()
         self.Show()
