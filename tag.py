@@ -1,8 +1,8 @@
 class Tag:
-    def __init__(self, id):
-        self.id = id
-        self.name = id[1:len(id)]
-        self.type = TagSwitcher().switch(id[0])
+    def __init__(self, tag):
+        self.id = tag
+        self.name = tag[1:len(tag)]
+        self.type = TagSwitcher().switch(tag[0])
         self.count = 1
     
     def increaseCount(self):
