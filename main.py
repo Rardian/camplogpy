@@ -1,8 +1,9 @@
 import wx
 import json
+import datetime
 from tag import Tag
 from campaign_log_reader import CampaignLogReader
-import datetime
+from order_list_ctrl import OrderListControl
 
 class MainPanel(wx.Panel):
     def __init__(self, parent):
@@ -31,11 +32,7 @@ class MainPanel(wx.Panel):
 
         # TODO add search (SearchCtrl)
 
-        self.allTags_list_ctrl = wx.ListCtrl(
-            self, size=(351, 450), 
-            style=wx.LC_REPORT | wx.BORDER_SUNKEN
-        )
-        self.create_columns(self.allTags_list_ctrl, 160, 120, 67)
+        self.allTags_list_ctrl = OrderListControl(self,  size=(351, 450))
         self.allTags_list_ctrl.Bind(wx.EVT_LIST_ITEM_SELECTED, self.update_details, self.allTags_list_ctrl)
         sizer.Add(self.allTags_list_ctrl, 1, wx.ALL, 5) 
 
@@ -55,17 +52,13 @@ class MainPanel(wx.Panel):
         def onButton(self):
             print("hallo")
 
-        button = wx.Button(self, wx.ID_ANY, 'Bild', (10, 8))
-        button.Bind(wx.EVT_BUTTON, onButton)
+        #button = wx.Button(self, wx.ID_ANY, 'Bild', (10, 8))
+        #button.Bind(wx.EVT_BUTTON, onButton)
         #headerSizer.Add(button, 0, wx.ALL, 0)
 
         sizer.Add(headerSizer, 0, wx.ALL|wx.EXPAND, 6)
 
-        self.linkedTags_list_ctrl = wx.ListCtrl(
-            self, size=(351, 150), 
-            style=wx.LC_REPORT | wx.BORDER_SUNKEN
-        )
-        self.create_columns(self.linkedTags_list_ctrl, 160, 120, 67)
+        self.linkedTags_list_ctrl = OrderListControl(self, size=(351, 150))
         self.linkedTags_list_ctrl.Bind(wx.EVT_LIST_ITEM_SELECTED, self.update_linkedTags, self.linkedTags_list_ctrl)
         sizer.Add(self.linkedTags_list_ctrl, 1, wx.ALL, 5) 
 
@@ -82,15 +75,15 @@ class MainPanel(wx.Panel):
     def update_details(self, event):
         ind = event.GetIndex()
         item = self.allTags_list_ctrl.GetItem(ind, 0)
-        id_of_row_tag = self.allTags_list_ctrl.GetItemData(ind)
         self.headline.SetLabelText(item.GetText())
 
-        row_tag = self.table_objects[id_of_row_tag]
+        row_tag = self.allTags_list_ctrl.get_row_object(ind)
+
         linkedEntries = CampaignLogReader(self.data).createLinks(row_tag)
         #linkedEntries = CampaignLogReader(self.data).createLinks(self.tagsInTable[ind])
         #self.linkedPostsInTable = []
-        self.linkedTags_list_ctrl.ClearAll()
-        self.create_columns(self.linkedTags_list_ctrl, 160, 120, 50)
+
+        self.linkedTags_list_ctrl.empty_table()
 
         index = 0
         for entry in linkedEntries:
@@ -98,7 +91,7 @@ class MainPanel(wx.Panel):
             entryAsTag.count = len(linkedEntries[entry])
 
             #self.linkedPostsInTable.append(linkedEntries[entry])
-            self.add_row(index, self.linkedTags_list_ctrl, entryAsTag, linkedEntries[entry])
+            self.linkedTags_list_ctrl.add_row(index, entryAsTag, linkedEntries[entry])
 
             index += 1
 
@@ -108,8 +101,8 @@ class MainPanel(wx.Panel):
     def update_linkedTags(self, event):
         ind = event.GetIndex()
         #item = self.linkedTags_list_ctrl.GetItem(ind, 0)
-        id_of_row_posts = self.linkedTags_list_ctrl.GetItemData(ind)
-        posts_of_row = self.table_objects[id_of_row_posts]
+
+        posts_of_row = self.linkedTags_list_ctrl.get_row_object(ind)
 
         self.linkedTag_textbox.Clear()
         #for post in self.linkedPostsInTable[ind]:
@@ -140,11 +133,9 @@ class MainPanel(wx.Panel):
             self.allTags = CampaignLogReader(self.data).readAllTags()
 
             # reset tag panel
-            self.allTags_list_ctrl.ClearAll()
-            self.create_columns(self.allTags_list_ctrl, 160, 120, 50)
+            self.allTags_list_ctrl.empty_table()
             # reset detail panel
-            self.linkedTags_list_ctrl.ClearAll()
-            self.create_columns(self.linkedTags_list_ctrl, 160, 120, 50)
+            self.linkedTags_list_ctrl.empty_table()
             self.linkedTag_textbox.Clear()
 
             index = 0
@@ -152,7 +143,7 @@ class MainPanel(wx.Panel):
             for tag in self.allTags:
 
                 #self.tagsInTable.append(tag)
-                self.add_row(index, self.allTags_list_ctrl, tag, tag)
+                self.allTags_list_ctrl.add_row(index, tag, tag)
 
                 index += 1
     
@@ -177,7 +168,7 @@ class MainFrame(wx.Frame):
                          title='Campaign Log Analyzer', size=(800, 600))
         self.panel = MainPanel(self)
         #self.create_menu()
-        icon_logo = wx.Icon("cllogo.ico", wx.BITMAP_TYPE_ICO)
+        icon_logo = wx.Icon("resources/cllogo.ico", wx.BITMAP_TYPE_ICO)
         self.SetIcon(icon_logo)
         self.Layout()
         self.Show()
